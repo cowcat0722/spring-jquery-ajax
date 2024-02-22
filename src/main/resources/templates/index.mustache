@@ -20,6 +20,17 @@
 </div>
 
 <script>
+    function del(boardId) {
+        $.ajax({
+            url: `api/boards/${boardId}`,
+            type: "delete"
+        }).done((res) => {
+            $(`#board-${boardId}`).remove();
+        }).fail((res) => {
+            alert(res.response.JSON.msg);
+            location.reload(); // F5
+        });
+    }
 
     $.ajax({
         url: "/api/boards",
@@ -29,7 +40,7 @@
         console.log(res);
 
         let boardList = res.body;
-        boardList.forEach((board)=>{
+        boardList.forEach((board) => {
             $("#board-box").append(render(board));
         });
     }).fail((res) => {
@@ -48,7 +59,7 @@
                     <td>${board.author}</td>
                     <td>
                         <div class="d-flex">
-                            <button onclick="del(${board.id}" class="btn btn-danger">삭제</button>
+                            <button onclick="del(${board.id})" class="btn btn-danger">삭제</button>
                             <form action="/board/${board.id}/updateForm" method="get">
                                 <button class="btn btn-warning">수정</button>
                             </form>
