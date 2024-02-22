@@ -1,5 +1,6 @@
 package shop.mtcoding.blog.board;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +12,15 @@ import java.util.List;
 public class BoardApiController {
     private final BoardRepository boardRepository;
 
+    @PutMapping("/api/boards/{id}")
+    public ApiUtil<?> update(@RequestBody BoardRequest.WriteAndUpdateDTO requestDTO, @PathVariable Integer id, HttpServletRequest request){
+        boardRepository.update(requestDTO, id);
+        request.setAttribute("id",id);
+        return new ApiUtil<>(null);
+    }
+
     @PostMapping("/api/boards")
-    public ApiUtil<?> write(@RequestBody BoardRequest.WriteDTO requestDTO){
+    public ApiUtil<?> write(@RequestBody BoardRequest.WriteAndUpdateDTO requestDTO){
         boardRepository.insert(requestDTO);
         return new ApiUtil<>(null);
     }
