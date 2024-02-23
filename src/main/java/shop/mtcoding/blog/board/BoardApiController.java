@@ -13,7 +13,7 @@ public class BoardApiController {
     private final BoardRepository boardRepository;
 
     @PutMapping("/api/boards/{id}")
-    public ApiUtil<?> update(@RequestBody BoardRequest.WriteAndUpdateDTO requestDTO, @PathVariable Integer id, HttpServletRequest request){
+    public ApiUtil<?> update(@RequestBody BoardRequest.UpdateDTO requestDTO, @PathVariable Integer id, HttpServletRequest request){
         boardRepository.update(requestDTO, id);
         request.setAttribute("id",id);
 
@@ -21,7 +21,7 @@ public class BoardApiController {
     }
 
     @PostMapping("/api/boards")
-    public ApiUtil<?> write(@RequestBody BoardRequest.WriteAndUpdateDTO requestDTO){
+    public ApiUtil<?> write(@RequestBody BoardRequest.WriteDTO requestDTO){
         boardRepository.insert(requestDTO);
         return new ApiUtil<>(null);
     }

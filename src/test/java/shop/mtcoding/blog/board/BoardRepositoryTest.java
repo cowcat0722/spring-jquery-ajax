@@ -51,7 +51,7 @@ public class BoardRepositoryTest {
     @Test
     public void insert_test(){ // 테스트 메서드는 파라미터가 없다. 리턴도 없다.
         // given
-        BoardRequest.WriteAndUpdateDTO requestDTO = new BoardRequest.WriteAndUpdateDTO();
+        BoardRequest.WriteDTO requestDTO = new BoardRequest.WriteDTO();
         requestDTO.setTitle("제목10");
         requestDTO.setContent("내용10");
         requestDTO.setAuthor("이순신");

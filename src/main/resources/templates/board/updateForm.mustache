@@ -5,6 +5,7 @@
         <div class="card-header"><b>익명 글수정 화면입니다</b></div>
         <div class="card-body">
             <form>
+<!--                <input type="hidden" id="id" value="{{board.id}}">-->
                 <div class="mb-3">
                     <input type="text" class="form-control" placeholder="Enter author" id="author" value="{{board.author}}">
                 </div>
@@ -21,18 +22,14 @@
 </div>
 
 <script>
+
     function btnUpdate(){
-        // JavaScript Object
+        // let id = $("#id").val()
         let board = {
             title: $("#title").val(),
             content: $("#content").val(),
             author: $("#author").val()
         };
-        // console.log(board);
-
-        // JavaScript Object -> JSON으로 바꾸기
-        // let boardJson = JSON.stringify(board);
-        // console.log(boardJson);
 
         $.ajax({
             url: `/api/boards/{{id}}`,
